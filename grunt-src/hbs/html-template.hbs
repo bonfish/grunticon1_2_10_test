@@ -1,0 +1,23 @@
+<!doctype HTML>
+<html>
+  <head>
+    <title>Icons Preview!</title>
+    <style>
+      body {
+        background: #eee;
+      }
+    </style>
+    <script>
+      {{{loaderText}}}
+      grunticon(["css/sprite-svg.css", "css/sprite-png.css", "css/sprite-png.css"]);
+    </script>
+  <noscript><link rel="stylesheet" type="text/css" href="css/sprite-png.css" media="all"/></noscript>
+  </head>
+  <body>
+    {{#each icons}}
+      {{#with this}}
+      <pre><code>{{prefix}}{{name}}:</code></pre><div class="{{prefixClass}}{{name}}" style="width: {{width}}px; height: {{height}}px;" ></div><hr/>
+      {{/with}}
+    {{/each}}
+</body>
+</html>

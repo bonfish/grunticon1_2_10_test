@@ -1,0 +1,4 @@
+grunt-src/node_modules
+grunt-src/.temp
+grunt-src/js
+grunt-src/scss
