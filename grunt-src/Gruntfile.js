@@ -5,7 +5,7 @@ module.exports = function(grunt){
 		// Переменные
 		meta:{
 			tmpDir:'.temp/',
-			srcRoot:'',
+			srcRoot:'./',
 			destRoot:'../assets/',
 			tplDir:'../templates/',
 			banner:"/* by bonflash | bonfable at ulanovka dot ru | 2014 */\n",
@@ -19,9 +19,9 @@ module.exports = function(grunt){
 			mainStyle:{
 				files:[{
 					expand:true,
-					cwd:'<%= meta.srcRoot %>scss/',
+					cwd:'scss/',
 					src:'*.scss',
-					dest:'<%= meta.destRoot %>css/',
+					dest:'../assets/css/',
 					ext:'.min.css',
 					extDot:'last'
 				}],
@@ -37,7 +37,7 @@ module.exports = function(grunt){
 					banner:'<%= meta.banner %>',
 				},
 				files:{
-					'<%= meta.destRoot %>js/scripts.min.js': ['<%= meta.srcRoot %>js/*.js'],
+					'../assets/js/scripts.min.js': ['js/*.js'],
 				}
 			}
 		},
@@ -55,9 +55,9 @@ module.exports = function(grunt){
 			icons:{
 				files:[{
 					expand:true,
-					cwd:'<%= meta.srcRoot %>img/svg/',
+					cwd:'img/svg/',
 					src:['**/*.svg', '!map-pin.svg'],
-					dest:'<%= meta.tmpDir %>img/svg/',
+					dest:'.temp/img/svg/',
 					
 				}],
 			},
@@ -74,9 +74,9 @@ module.exports = function(grunt){
 				},
 				files:[{
 					expand:true,
-					cwd:'<%= meta.srcRoot %>img/svg/',
+					cwd:'img/svg/',
 					src:'map-pin.svg',
-					dest:'<%= meta.tmpDir %>img/svg/',
+					dest:'.temp/img/svg/',
 					
 				}],
 			}
@@ -86,22 +86,22 @@ module.exports = function(grunt){
 			icons:{
 				files:[{
 					expand:true,
-					cwd:'<%= meta.tmpDir %>img/svg/',
+					cwd:'.temp/img/svg/',
 					src:'**/*.svg',
-					dest:'<%= meta.srcRoot %>',
+					dest:'',
 				}],
 				options: {
-					datasvgcss: '<%= meta.srcRoot %>scss/sprite/sprite-svg.scss',
-					datapngcss:'<%= meta.tmpDir %>scss/sprite/sprite-png.scss',
-					urlpngcss:'<%= meta.tmpDir %>scss/sprite/sprite-png-fallback.scss',
-					previewhtml: '<%= meta.tplDir %>svg.html',
-					loadersnippet: '<%= meta.srcRoot %>js/grunticon.loader.js',
-					pngfolder:'<%= meta.tmpDir %>img/png/',
+					datasvgcss: 'scss/sprite/sprite-svg.scss',
+					datapngcss:'.temp/scss/sprite/sprite-png.scss',
+					urlpngcss:'.temp/scss/sprite/sprite-png-fallback.scss',
+					previewhtml: '../templates/svg.html',
+					loadersnippet: 'js/grunticon.loader.js',
+					pngfolder:'.temp/img/png/',
 					customselectors: {
 						'*': ['.with-icon-$1:before'],
 					},
-					previewTemplate: '<%= meta.srcRoot %>hbs/html-template.hbs',
-					template:'<%= meta.srcRoot %>hbs/svg-template.hbs',
+					previewTemplate: 'hbs/html-template.hbs',
+					template:'hbs/svg-template.hbs',
 					
 				}
 			}
@@ -109,23 +109,23 @@ module.exports = function(grunt){
 		// Отслеживаем
 		watch:{
 			js:{
-				files:['<%= meta.srcRoot %>js/*.js'],
+				files:['js/*.js'],
 				tasks:['newer:uglify']
 			},
 			libJS:{
-				files:['<%= meta.srcRoot %>js/libs/**/*.js'],
+				files:['js/libs/**/*.js'],
 				tasks:['processJSLibs']
 			},
 			sass:{
-				files:['<%= meta.srcRoot %>scss/**/*.scss'],
+				files:['scss/**/*.scss'],
 				tasks:['newer:sass:mainStyle']
 			},
 			livereload: {
 				options: { livereload: 35727 },
 				files: [
-					'<%= meta.destRoot %>css/**/*.css', 
+					'../assets/css/**/*.css', 
 					'../templates/**/*.html', 
-					'<%= meta.destRoot %>js/**/*.js', 
+					'../assets/js/**/*.js', 
 				],
 			},
 		},
